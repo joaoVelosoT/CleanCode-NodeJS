@@ -1,20 +1,21 @@
 const { Router } = require('express');
+const userController = require('../controllers/userController');
 const router = Router();
 
-router.post('/', ) // funcao de criar
+router.post('/', userController.create) // funcao de criar
 
 // funcao de editar
-router.put('/:id', );
+router.put('/:id', userController.update);
 
 // funcao de deletar
-router.delete('/:id', );
+router.delete('/:id', userController.delete);
 
 // buscar unico
-router.get('/:id', );
+router.get('/:id', userController.findOne);
 
 // buscar todos
 
 
-router.get('/', );
+router.get('/', userController.findAll);
 
 module.exports = router;

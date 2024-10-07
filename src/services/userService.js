@@ -3,22 +3,26 @@ const User = require('../models/user');
 const userService = {
     create: async (user) => {
         try {
+            const user = await User.create(user);
 
-            return await User.create(user);
+            return user
 
         } catch (error) {
             throw new Error('Ocorreu um erro ao Criar User');
         }
     },
-    update: async (id, userToUpdate) => {
+    update: async (id,data) => {
         try {
+
             const user = await User.findByPk(id);
 
             if(!user) {
                 return null;
             }
-            await user.update(userToUpdate);
-            await user.save();
+
+            await user.update(data);
+
+            // await user.save();
 
         } catch (error) {
             throw new Error('Ocorreu um erro ao Atualizar User');
@@ -41,8 +45,9 @@ const userService = {
     },
     getAll : async () => {
         try {
-            return await User.findAll();
+            const users = await User.findAll();
 
+            return users
         } catch (error) {
             throw new Error('Ocorreu um erro ao buscar todos User');
         }

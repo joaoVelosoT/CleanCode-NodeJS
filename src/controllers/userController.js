@@ -3,11 +3,19 @@ const userService = require("../services/userService");
 const userController = {
   create: async (req, res) => {
     try {
-      const user = await userService.create(req.body);
+      const data = {
+        nome : req.body.nome,
+        email : req.body.email
+      }
+
+      const user = await userService.create(data);
+
       return res.status(201).json({
         msg: "Usuario criado com sucesso",
         user,
       });
+
+
     } catch (error) {
       return res.status(500).json({
         msg: "Erro ao tentar criar o Usuario",
@@ -16,13 +24,14 @@ const userController = {
   },
   update : async (req,res) => {
     try {
+        const {id} = req.params;
 
-        const userObj = {
-            nome : req.body.nome,
-            email : req.body.email
+        const data = {
+          nome : req.body.nome,
+          email : req.body.email
         }
-        
-        const user = await userService.update(req.params.id, req.body);
+
+        const user = await userService.update(id,data);
 
         if(!user){
             return res.status(400).json({
