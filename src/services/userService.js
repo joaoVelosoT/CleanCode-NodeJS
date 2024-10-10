@@ -1,9 +1,9 @@
 const User = require('../models/user');
 
 const userService = {
-    create: async (user) => {
+    create: async (data) => {
         try {
-            const user = await User.create(user);
+            const user = await User.create(data);
 
             return user
 
@@ -20,7 +20,7 @@ const userService = {
                 return null;
             }
 
-            await user.update(data);
+            return await user.update(data);
 
             // await user.save();
 

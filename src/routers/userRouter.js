@@ -11,11 +11,11 @@ router.put('/:id', userController.update);
 router.delete('/:id', userController.delete);
 
 // buscar unico
-router.get('/:id', userController.findOne);
+router.get('/:id', userController.getOne);
 
 // buscar todos
 
 
-router.get('/', userController.findAll);
+router.get('/', userController.getAll);
 
 module.exports = router;

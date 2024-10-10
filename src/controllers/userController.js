@@ -3,6 +3,7 @@ const userService = require("../services/userService");
 const userController = {
   create: async (req, res) => {
     try {
+      
       const data = {
         nome : req.body.nome,
         email : req.body.email
@@ -17,6 +18,7 @@ const userController = {
 
 
     } catch (error) {
+      console.error(error);
       return res.status(500).json({
         msg: "Erro ao tentar criar o Usuario",
       });
@@ -49,6 +51,62 @@ const userController = {
         return res.status(500).json({
             msg : 'Erro ao atualizar o User'
         })
+    }
+  },
+  delete : async (req,res) => {
+    try {
+      const {id} = req.params;
+
+      const user = await userService.delete(id);
+
+      if(!user){
+        return res.status(400).json({
+          msg : "Usuario nao encontrado"
+        })
+      }
+
+      return res.status(200).json({
+        msg : "User deletado",
+        user
+      })
+    } catch (error) {
+      
+    }
+  },
+  getAll : async (req,res) => {
+    try {
+      const users = await userService.getAll();
+
+      return res.status(200).json({
+        msg : "Todos os usuarios",
+        users
+      })
+    } catch (error) {
+      return res.status(500).json({
+        msg : "Erro ao listar os users"
+      })
+    }
+  }, 
+  getOne : async (req,res) => {
+    try {
+      const {id} = req.params;
+
+      const user = await userService.getById(id);
+
+      if(!user){
+        return res.status(400).json({
+          msg : "User não encontrado"
+        })
+      }
+
+      return res.status(200).json({
+        msg : "User encontrado",
+        user
+      })
+    } catch (error) {
+      return res.status(500).json({
+        msg : "Erro ao listar unico"
+      })
     }
   }
 };
