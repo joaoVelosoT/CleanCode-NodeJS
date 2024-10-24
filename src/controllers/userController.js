@@ -48,6 +48,7 @@ const userController = {
 
         
     } catch (error) {
+      console.error(error);
         return res.status(500).json({
             msg : 'Erro ao atualizar o User'
         })
@@ -70,7 +71,10 @@ const userController = {
         user
       })
     } catch (error) {
-      
+      console.error(error);
+      return res.status(500).json({
+        msg : "Erro, contate o suporte"
+      })
     }
   },
   getAll : async (req,res) => {
@@ -82,6 +86,7 @@ const userController = {
         users
       })
     } catch (error) {
+      console.error(error);
       return res.status(500).json({
         msg : "Erro ao listar os users"
       })
@@ -104,6 +109,7 @@ const userController = {
         user
       })
     } catch (error) {
+      console.error(error);
       return res.status(500).json({
         msg : "Erro ao listar unico"
       })

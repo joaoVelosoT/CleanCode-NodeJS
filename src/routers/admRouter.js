@@ -1,13 +1,16 @@
 const {Router} = require('express');
 const admController = require('../controllers/admController');
+const validateAdm = require('../middlewares/validateAdm');
 const router = Router();
 
 
-// Rota para fazer login
-router.post('/login', admController.login);
+// Rota para esqueci a senha
+router.post('/esqueciasenha', admController.esqueciasenha);
+ 
+
 
 // Rota para criar
-router.post('/', admController.create);
+router.post('/', validateAdm, admController.create);
 
 // Rota para buscar todos
 router.get('/', admController.getAll);

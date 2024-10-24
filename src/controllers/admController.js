@@ -139,6 +139,34 @@ const admController = {
                 msg : 'Erro, Contate o suporte'
             })
         }
+    },
+    esqueciasenha : async (req,res) => {
+        try {
+            
+            const data = {
+                nome : req.body.nome,
+                email : req.body.email,
+                novasenha : req.body.novasenha
+            }
+
+            const adm = await admService.esqueciasenha(data);
+            
+            if(!adm){
+                return res.status(400).json({
+                    msg : 'Dados invalidos, não foi possivel trocar a senha'
+                })
+            }
+
+            return res.status(200).json({
+                msg : "Senha trocada com sucesso"
+            })
+
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({
+                msg : 'Erro, Contate o suporte'
+            })
+        }
     }
 }
 
